@@ -5,6 +5,7 @@ using UnityEngine;
 public class ForStatementCheck : MonoBehaviour
 {
 
+    int breakCount = 67;
 
     // Start is called before the first frame update
     void Start ()
@@ -37,6 +38,13 @@ public class ForStatementCheck : MonoBehaviour
 
         for ( var count = 0 ; count < fizzbuzzCount ; count++ )
         {
+            //countがbreakCountと同じ値だった時に、このループを抜けてください。
+            if (count == breakCount)
+            {
+                break;
+            }
+
+
             //ループ中でもし、fizzbuzzCountが3と5で割れれば、その数にfizzbuzzを文字列を連結してDebug.Logに出す。
             if ( ( count % 3 == 0 ) && ( count % 5 == 0 ) )
             {
@@ -44,6 +52,8 @@ public class ForStatementCheck : MonoBehaviour
                 continue;//処理を途中で止めて、次のループにいってもらう。
                 //break;  ループ自体をを終わらせる
             }
+
+
 
             if ( count % 3 == 0 )
             {
