@@ -5,7 +5,11 @@ using UnityEngine;
 public class ForeachStatementCheck : MonoBehaviour
 {
 
-    int [] intArray = new int [20];
+    //int [] intArray = new int [20];
+
+    int [] intArray = new int [101];
+    bool check = false;
+
 
     // Start is called before the first frame update
     void Start ()
@@ -37,18 +41,55 @@ public class ForeachStatementCheck : MonoBehaviour
         //    }
         //}
 
-        //Listは要素数を増やすことができます
-        intList.Add ( 21 );
+        ////Listは要素数を増やすことができます
+        //intList.Add ( 21 );
 
-        //Listは要素数を減らすこともできます
-        intList.Remove ( 0 );
+        ////Listは要素数を減らすこともできます
+        //intList.Remove ( 0 );
 
+        //foreach ( var intValue in intList )
+        //{
+        //    // intArrayの中に21は含まれているので、下記ログは出ない
+        //    if ( intValue == 21 )
+        //    {
+        //        Debug.Log ( "この配列に21は含まれている" );
+        //    }
+
+
+        for ( int number = 2 ; number <= 100 ; number++ )
+        {
+            for ( int i = 2 ; i < number ; i++ )
+            {
+                if ( number % i == 0 )
+                {
+                    check = true;
+                    break;
+                }
+            }
+
+            //もしintList内に素数があったら
+            if ( !check )
+
+            //Debug.Logに表示せよ
+            {
+                Debug.Log ( $"{number}," );
+                continue;
+            }
+            check = false;
+        }
+
+        //intList内を捜査します。
         foreach ( var intValue in intList )
         {
-            // intArrayの中に21は含まれているので、下記ログは出ない
-            if ( intValue == 21 )
+            //もしintValueが5だったら
+            if ( ( !check && intValue == 5 ) )
             {
-                Debug.Log ( "この配列に21は含まれている" );
+                Debug.Log ( "5" );
+            }
+            //もしintValueが90だったら
+            if ( ( !check && intValue == 90 ) )
+            {
+                Debug.Log ( "90" );
             }
         }
     }
