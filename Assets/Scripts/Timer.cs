@@ -41,9 +41,15 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        gameTime += Time.deltaTime;
+
         limitTime -= Time.deltaTime;
 
         frameCounter++;
+
+
+
+
 
         //‚à‚µframeCounter‚ª30ƒtƒŒ[ƒ€‚É‚È‚Á‚½‚ç
         if ( frameCounter >= 30 )
