@@ -56,7 +56,7 @@ public class ForeachStatementCheck : MonoBehaviour
         //    }
 
 
-        for ( int number = 2 ; number <= 100 ; number++ )
+        for ( int number = 2 ; number <= 1000 ; number++ )
         {
             for ( int i = 2 ; i < number ; i++ )
             {
