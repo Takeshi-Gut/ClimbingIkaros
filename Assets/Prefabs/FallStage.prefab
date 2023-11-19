@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FallStage
       objectReference: {fileID: 0}
+    - target: {fileID: 5851580746242870276, guid: 178dc487254295648ae1a7b78f1da79e, type: 3}
+      propertyPath: StageType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

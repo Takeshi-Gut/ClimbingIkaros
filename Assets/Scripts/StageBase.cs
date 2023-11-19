@@ -27,6 +27,24 @@ public class StageBase : MonoBehaviour
                 break;
             case StageTypes.Fall:
                 //Playerが当たったら落とす実装
+                if ( collision.gameObject.tag == GameSettingUtility.PlayerTagName )
+                {
+                    //もし、このゲームオブジェクトの中にリジッドボディ2Dが無かったら
+                    if ( this.gameObject.GetComponent<Rigidbody2D> () == null )
+                    {
+                        //リジッドボディ2Dを追加せよ
+                        this.gameObject.AddComponent<Rigidbody2D> ();
+                    }
+                }
+
+                //もし、他のステージに当たったらゲームオブジェクトのアクティブを切る
+                if ( collision.gameObject.layer == GameSettingUtility.GroundLayerNumber )
+                {
+                    this.gameObject.SetActive ( false );
+                }
+
+
+
                 Debug.Log ( "落とす" );
                 break;
         }

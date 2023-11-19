@@ -51,19 +51,19 @@ public class Timer : MonoBehaviour
 
 
 
-        //もしframeCounterが30フレームになったら
-        if ( frameCounter >= 30 )
-        {
-            //Debug.logに"30フレーム経過しました"と表示する
-            Debug.Log("30フレーム経過しました");
-        }
+        ////もしframeCounterが30フレームになったら
+        //if ( frameCounter >= 30 )
+        //{
+        //    //Debug.logに"30フレーム経過しました"と表示する
+        //    Debug.Log("30フレーム経過しました");
+        //}
 
-        //もしframeCounterが30で割り切れたなら
-        if(frameCounter % 30 == 0)
-        {
-            //Debug.logに"1秒経過"と表示する
-            Debug.Log("1秒経過");
-        }
+        ////もしframeCounterが30で割り切れたなら
+        //if(frameCounter % 30 == 0)
+        //{
+        //    //Debug.logに"1秒経過"と表示する
+        //    Debug.Log("1秒経過");
+        //}
 
         
 

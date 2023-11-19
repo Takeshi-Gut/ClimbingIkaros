@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1551124302376855128}
   - component: {fileID: 3398646226639139532}
   - component: {fileID: 2355423852818698475}
+  - component: {fileID: 5851580746242870276}
   m_Layer: 6
   m_Name: Stage
   m_TagString: Untagged
@@ -130,3 +131,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5851580746242870276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732007637194628161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c464b8189bdfb104fa3e3b5380a7fe2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageType: 0
