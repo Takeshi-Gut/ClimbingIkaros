@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public JumpCount JumpCount;
+
+
     /// <summary>
     /// 移動速度
     /// </summary>
@@ -52,11 +55,34 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle
             ( transform.position - new Vector3 ( 0,0.9f,0 ),0.2f,GroundLayer );
 
+
+
+        ////地面に接触している場合
+        //if ( isGrounded )
+        //{
+        //    //PlayerのRigidbody2Dに上向きの力を加える
+        //    playerRigidBody.velocity = new Vector2 ( playerRigidBody.velocity.x,jumpForce );
+
+        //    //ジャンプカウント処理を呼び出す
+        //    JumpCount.AddJumpCount();
+
+        //}
+    }
+
+    private void FixedUpdate ()
+    {
         //地面に接触している場合
         if ( isGrounded )
         {
             //PlayerのRigidbody2Dに上向きの力を加える
             playerRigidBody.velocity = new Vector2 ( playerRigidBody.velocity.x,jumpForce );
+
+            //ジャンプカウント処理を呼び出す
+            JumpCount.AddJumpCount ();
+
         }
     }
+
+
+
 }

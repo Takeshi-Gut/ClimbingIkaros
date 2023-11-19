@@ -72,23 +72,23 @@ public class Timer : MonoBehaviour
 
         //Debug.Log($"{limitTime}");
 
-        //limitTimeが0以下になったら
-        if ( limitTime < 0 )
-        {
-            //タイムアップと表示する
-            Debug.Log ( "タイムアップ" );
+        ////limitTimeが0以下になったら
+        //if ( limitTime < 0 )
+        //{
+        //    //タイムアップと表示する
+        //    Debug.Log ( "タイムアップ" );
 
-            //黄色いログ←注意してくださいログ
-            Debug.LogWarning ( "タイムアップ" );
+        //    //黄色いログ←注意してくださいログ
+        //    Debug.LogWarning ( "タイムアップ" );
 
-            //赤いログ←エラーが起きましたログ
-            Debug.LogError ( "タイムアップ" );
-        }
-        else //そうじゃなかったら
-        {
-            //limitTimeをログにだす
-            Debug.Log ( $"{limitTime}" );
-        }
+        //    //赤いログ←エラーが起きましたログ
+        //    Debug.LogError ( "タイムアップ" );
+        //}
+        //else //そうじゃなかったら
+        //{
+        //    //limitTimeをログにだす
+        //    Debug.Log ( $"{limitTime}" );
+        //}
 
         //処理の内容をコメントで書いちゃう。
 
