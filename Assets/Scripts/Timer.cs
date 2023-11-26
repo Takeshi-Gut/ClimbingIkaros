@@ -24,28 +24,68 @@ public class Timer : MonoBehaviour
         }
     }
 
-    private float limitTime = 10f;
 
-    private int frameCounter = 0;
 
-    public float GetFrameCounter
+    /// <summary>
+    /// 制限時間
+    /// </summary>
+    private float limitTime = 30f;
+
+
+
+
+    //リミットタイムのgetter
+    public float GetLimitTime
     {
         get
         {
-            return frameCounter;
+            return limitTime;
         }
     }
+
+    public string GetLimitTimeText
+    {
+        get
+        {
+            return limitTime.ToString ( "F2" );
+        }
+    }
+
+
+
+    //private int frameCounter = 0;
+
+    //public float GetFrameCounter
+    //{
+    //    get
+    //    {
+    //        return frameCounter;
+    //    }
+    //}
 
 
 
     // Update is called once per frame
     void Update ()
     {
-        gameTime += Time.deltaTime;
+        if ( limitTime == 0 )
+        {
+            Debug.LogError ( "ゲームオーバー" );
+            return;
+        }
+
+        //もしgameTimeが0を下回れば、
+        //このif文より下の処理を行わない
+        if ( limitTime <= 0 )
+        {
+            limitTime = 0f;
+            return;
+        }
 
         limitTime -= Time.deltaTime;
 
-        frameCounter++;
+        //gameTime += Time.deltaTime;
+        //frameCounter++;
 
 
 
@@ -65,14 +105,14 @@ public class Timer : MonoBehaviour
         //    Debug.Log("1秒経過");
         //}
 
-        
+
 
 
 
 
         //Debug.Log($"{limitTime}");
 
-        ////limitTimeが0以下になったら
+        //limitTimeが0以下になったら
         //if ( limitTime < 0 )
         //{
         //    //タイムアップと表示する
@@ -101,3 +141,4 @@ public class Timer : MonoBehaviour
         //}
     }
 }
+

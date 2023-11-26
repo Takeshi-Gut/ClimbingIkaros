@@ -10,7 +10,13 @@ public class StageBase : MonoBehaviour
         Invalide = -1, //未定義
         Normal,//通常
         Fall, //落ちる
+        Acceleration,//制限時間が早くなる
+        Damage,//ダメージを与える
+        Move,//動く床
     }
+
+
+
 
     /// <summary>
     /// ステージタイプを通常で初期化
@@ -23,8 +29,10 @@ public class StageBase : MonoBehaviour
         {
             case StageTypes.Invalide:
                 break;
+
             case StageTypes.Normal:
                 break;
+
             case StageTypes.Fall:
                 //Playerが当たったら落とす実装
                 if ( collision.gameObject.tag == GameSettingUtility.PlayerTagName )
@@ -42,20 +50,55 @@ public class StageBase : MonoBehaviour
                 {
                     this.gameObject.SetActive ( false );
                 }
-
-
-
                 Debug.Log ( "落とす" );
+                break;
+
+            case StageTypes.Acceleration:
+                //もし当たってきた相手のtagがPlayerだったら、
+                if ( collision.gameObject.tag == GameSettingUtility.PlayerTagName )
+                {
+                    ////時間の縮尺を変更する。
+                    //Time.timeScale *= 1.2f;
+                    //Debug.Log ( $"{Time.timeScale}" );
+
+                    //もしtimeScaleが2倍を超えないかぎりtimeScaleは変更される
+                    if ( Time.timeScale < 2f )
+                    {
+                        //timeScaleは2倍のままにする
+                        Time.timeScale *= 1.2f;
+                        Debug.Log ( $"{Time.timeScale}" );
+                    }
+                }
+                break;
+
+            case StageTypes.Damage:
+                //もし当たってきた相手のtagがPlayerだったら、
+                if ( collision.gameObject.tag == GameSettingUtility.PlayerTagName )
+                {
+                    //Healthコンポーネントをゲットしてきて
+                    var health = collision.gameObject.GetComponent<Health> ();
+                    if ( health != null )
+                    {
+                        //HealthコンポーネントのTakeDamageを発動させる。
+                        health.TakeDamage ( 20f );
+                    }
+                }
                 break;
         }
     }
 
-
-
-
-    // Update is called once per frame
-    void Update ()
+    private void Update ()
     {
-
+        //もしステージタイプがMoveだったら
+        if ( StageType == StageTypes.Move )
+        {
+            //引数に時間を突っ込んだSinを取得する
+            //Sin(x)のグラフの動きをするので1から-1の値が代入される。
+            var sin = Mathf.Sin ( Time.time );
+            // 一時変数のposを作成し、コードを読みやすくする
+            var pos = this.transform.position;
+            // 自分のpositionのxの値にsinを足し続ける
+            this.transform.position = new Vector3 ( pos.x + sin * 0.01f,pos.y,pos.z );
+        }
     }
 }

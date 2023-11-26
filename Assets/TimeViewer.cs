@@ -17,8 +17,11 @@ public class TimeViewer : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void Update ()
     {
-        TimerText.text = Timer.GetGameTimeText;
+        //TimerText.text = Timer.GetGameTimeText;
+
+        //リミットタイムをタイマーテキストに代入せよ
+        TimerText.text = Timer.GetLimitTimeText;
     }
 }
