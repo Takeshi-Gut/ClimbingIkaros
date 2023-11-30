@@ -14,4 +14,9 @@ public static class GameSettingUtility
     /// Groundのレイヤーナンバー（No.）
     /// </summary>
     public const int GroundLayerNumber = 6;
+
+    /// <summary>
+    /// ステージの横への移動幅
+    /// </summary>
+    public const float MoveStageHorizontalFactor = 0.01f;
 }

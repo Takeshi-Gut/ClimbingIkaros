@@ -31,6 +31,12 @@ public class StageBase : MonoBehaviour
                 break;
 
             case StageTypes.Normal:
+                 //Playerが当たったら落とす実装
+                if ( collision.gameObject.tag == GameSettingUtility.PlayerTagName )
+                {
+                    Time.timeScale = 1f;
+                }
+
                 break;
 
             case StageTypes.Fall:
@@ -98,7 +104,10 @@ public class StageBase : MonoBehaviour
             // 一時変数のposを作成し、コードを読みやすくする
             var pos = this.transform.position;
             // 自分のpositionのxの値にsinを足し続ける
-            this.transform.position = new Vector3 ( pos.x + sin * 0.01f,pos.y,pos.z );
+            this.transform.position = new Vector3
+                ( pos.x + sin * GameSettingUtility.MoveStageHorizontalFactor,
+                pos.y,
+                pos.z );
         }
     }
 }
