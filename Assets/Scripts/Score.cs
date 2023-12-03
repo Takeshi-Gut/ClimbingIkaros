@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    public float score = 0f;
+    private float score = 0f;
     public GameObject Player;
+
+    private float currentHighScore = 0f;
+
 
     /// <summary>
     /// score‚Ìgetter
@@ -14,7 +17,7 @@ public class Score : MonoBehaviour
     {
         get
         {
-            return score;
+            return currentHighScore;
         }
     }
 
@@ -22,8 +25,11 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        score = Player.transform.position.y;
+        if ( currentHighScore < Player.transform.position.y )
+        {
+            currentHighScore = Player.transform.position.y;
+        }
 
-        Debug.Log ( $"{Player.transform.position.y}" );
+        Debug.Log ( currentHighScore );
     }
 }
