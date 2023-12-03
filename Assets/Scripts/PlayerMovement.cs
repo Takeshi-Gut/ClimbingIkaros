@@ -32,6 +32,20 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private Rigidbody2D playerRigidBody;
 
+    /// <summary>
+    /// ジャンプ力
+    /// </summary>
+    private float jumpPower = 0f;
+
+    public float GetJumpPower
+    {
+        get
+        {
+            return jumpPower;
+        }
+    }
+
+
     void Start ()
     {
         playerRigidBody = GetComponent<Rigidbody2D> ();
@@ -79,8 +93,12 @@ public class PlayerMovement : MonoBehaviour
 
             //ジャンプカウント処理を呼び出す
             JumpCount.AddJumpCount ();
-
         }
+
+        //jumpPowerに加速度のyを与える
+        jumpPower = playerRigidBody.velocity.y;
+
+
     }
 
 

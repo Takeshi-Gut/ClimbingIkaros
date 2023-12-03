@@ -15,13 +15,34 @@ public class StageBase : MonoBehaviour
         Move,//動く床
     }
 
-
-
-
     /// <summary>
     /// ステージタイプを通常で初期化
     /// </summary>
     public StageTypes StageType = StageTypes.Normal;
+
+
+
+
+
+    /// <summary>
+    /// 侵入判定
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D ( Collider2D collision )
+    {
+        //当たってきたのがプレイヤーだったら
+        if ( collision.gameObject.tag == GameSettingUtility.PlayerTagName )
+        {
+            if ( collision.transform.position.y > this.transform.position.y )
+            {
+                //自分のBoxCollider2DのIsTriggerをオフにする
+                this.GetComponent<BoxCollider2D> ().isTrigger = false;
+            }
+        }
+    }
+
+
+
 
     private void OnCollisionEnter2D ( Collision2D collision )
     {
@@ -31,7 +52,7 @@ public class StageBase : MonoBehaviour
                 break;
 
             case StageTypes.Normal:
-                 //Playerが当たったら落とす実装
+                //Playerが当たったら落とす実装
                 if ( collision.gameObject.tag == GameSettingUtility.PlayerTagName )
                 {
                     Time.timeScale = 1f;
