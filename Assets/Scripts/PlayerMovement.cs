@@ -24,8 +24,9 @@ public class PlayerMovement : MonoBehaviour
 
     /// <summary>
     /// 地面に接触しているかどうか
+    /// bool型のIsGroundedを書き換えた
     /// </summary>
-    private bool isGrounded;
+    private Collider2D isGroundedCollider;
 
     /// <summary>
     /// Rigidbody2Dコンポーネント
@@ -45,6 +46,23 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 右向きかどうか
+    /// </summary>
+    private bool isRight = true;
+
+    /// <summary>
+    /// 外部から右向きかどうかを取得するアクセサ
+    /// </summary>
+    public bool GetIsRight
+    {
+        get
+        {
+            return isRight;
+        }
+    }
+
+
 
     void Start ()
     {
@@ -62,11 +80,32 @@ public class PlayerMovement : MonoBehaviour
         //左右の移動を計算
         var moveX = horizontalInput * moveSpeed * Time.deltaTime;
 
+
+        if ( isRight )
+        {
+            //左が押された
+            if ( horizontalInput < 0 )
+            {
+                isRight = false;
+            }
+        }
+        else
+        {
+            //右が押された
+            if ( horizontalInput > 0 )
+            {
+                isRight = true;
+            }
+        }
+
+
+
+
         //現在の位置に移動量を追加
         transform.Translate ( new Vector3 ( moveX,0,0 ) );
 
         //地面に接触しているかを判定
-        isGrounded = Physics2D.OverlapCircle
+        isGroundedCollider = Physics2D.OverlapCircle
             ( transform.position - new Vector3 ( 0,0.9f,0 ),0.2f,GroundLayer );
 
 
@@ -85,22 +124,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate ()
     {
-        //地面に接触している場合
-        if ( isGrounded )
+        //地面に接地しており、なおかつ下降中の場合
+        if ( isGroundedCollider != null && playerRigidBody.velocity.y < 0f )
         {
-            //PlayerのRigidbody2Dに上向きの力を加える
-            playerRigidBody.velocity = new Vector2 ( playerRigidBody.velocity.x,jumpForce );
+            //当たったColliderのStageBaseを取得
+            var stageBase = isGroundedCollider.GetComponent<StageBase> ();
 
-            //ジャンプカウント処理を呼び出す
-            JumpCount.AddJumpCount ();
+            //StageBaseが取得できれば
+            if ( stageBase != null )
+            {
+                stageBase.OnCollisionEnter2DAction ( this.gameObject );
+
+
+                //PlayerのRigidbody2Dに上向きの力を加える
+                playerRigidBody.velocity = new Vector2 ( playerRigidBody.velocity.x,jumpForce );
+
+                //ジャンプカウント処理を呼び出す
+                JumpCount.AddJumpCount ();
+            }
+
+            //jumpPowerに加速度のyを与える
+            jumpPower = playerRigidBody.velocity.y;
+
+
         }
 
-        //jumpPowerに加速度のyを与える
-        jumpPower = playerRigidBody.velocity.y;
-
-
     }
-
-
 
 }

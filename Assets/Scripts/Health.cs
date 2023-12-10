@@ -15,6 +15,19 @@ public class Health : MonoBehaviour
     private float currentHealth;
 
     /// <summary>
+    /// currentHealthをゲットするためのアクセサ（ゲッター）
+    /// </summary>
+    public float GetCurrentHealth
+    {
+        get
+        {
+            return currentHealth;
+        }
+    }
+
+
+
+    /// <summary>
     /// 死亡判定
     /// </summary>
     public bool IsDead = false;//死亡フラグは"折れている"状態

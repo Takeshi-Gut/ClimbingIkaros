@@ -5,7 +5,7 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     private float score = 0f;
-    public GameObject Player;
+    public PlayerMovement Player;
 
     private float currentHighScore = 0f;
 

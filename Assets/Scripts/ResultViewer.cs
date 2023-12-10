@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ResultViewer : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class ResultViewer : MonoBehaviour
 
     public Score Score;
 
-    public Canvas MovingCanvas;
+    public Button RetryButton;
 
     /// <summary>
     /// GameObjectがアクティブになったときに実行される
@@ -19,7 +20,7 @@ public class ResultViewer : MonoBehaviour
     {
         HighScoreText.text = $"貴方のスコアは{Score.GetScoreText}";
 
-        MovingCanvas.gameObject.SetActive ( true );
+        RetryButton.gameObject.SetActive ( true );
     }
 
     /// <summary>
