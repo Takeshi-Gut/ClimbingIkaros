@@ -16,11 +16,11 @@ public class ResultViewer : MonoBehaviour
     /// <summary>
     /// GameObjectがアクティブになったときに実行される
     /// </summary>
-    private void OnEnable ()
+    private void OnEnable()
     {
         HighScoreText.text = $"貴方のスコアは{Score.GetScoreText}";
 
-        RetryButton.gameObject.SetActive ( true );
+        RetryButton.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -28,6 +28,6 @@ public class ResultViewer : MonoBehaviour
     /// </summary>
     public void Reload()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(GameSceneUtility.GameSceneName);
     }
 }

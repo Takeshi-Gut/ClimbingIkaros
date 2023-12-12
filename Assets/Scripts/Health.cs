@@ -19,10 +19,7 @@ public class Health : MonoBehaviour
     /// </summary>
     public float GetCurrentHealth
     {
-        get
-        {
-            return currentHealth;
-        }
+        get { return currentHealth; }
     }
 
 
@@ -36,7 +33,7 @@ public class Health : MonoBehaviour
     /// <summary>
     /// 最初に一回だけ処理されるメソッド
     /// </summary>
-    void Start ()
+    void Start()
     {
         //現在のHitPointに最大HitPointを代入
         currentHealth = MaxHealth;
@@ -46,26 +43,26 @@ public class Health : MonoBehaviour
     /// 現在のHitPointからdamage分の値を引く
     /// </summary>
     /// <param name="damage">HitPointから引かれる値</param>
-    public void TakeDamage ( float damage )
+    public void TakeDamage(float damage)
     {
         //HitPointが0なのでこのifより下は処理を行わないようにする
-        if ( currentHealth == 0 )
+        if (currentHealth == 0)
         {
             return;
         }
         //現在のHPが0より上なら
-        if ( currentHealth > 0 )
+        if (currentHealth > 0)
         {
             currentHealth -= damage;
-            Debug.Log ( $"現在のHealthは{currentHealth}" );
+            Debug.Log($"現在のHealthは{currentHealth}");
         }
         //HitPointが0を下回ったなら
-        if ( currentHealth <= 0 )
+        if (currentHealth <= 0)
         {
             //currentHealthを0にする。
             currentHealth = 0;
 
-            Debug.LogError ( "ゲームオーバー" );
+            Debug.LogError("ゲームオーバー");
             //死亡フラグを"立てる"
             IsDead = true;
         }
