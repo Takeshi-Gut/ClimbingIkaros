@@ -51,7 +51,7 @@ public class ResultViewer : MonoBehaviour
     /// </summary>
     public void Reload()
     {
-        SceneManager.LoadScene(GameSceneUtility.GameSceneName);
+        SceneManager.LoadScene(GameSceneUtility.SampleSceneName);
     }
 
     /// <summary>

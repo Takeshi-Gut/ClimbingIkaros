@@ -12,6 +12,6 @@ public class TitleSceneManager : MonoBehaviour
     /// </summary>
     public void GotoInGameScene()
     {
-        SceneManager.LoadScene(GameSceneUtility.TitleSceneName);
+        SceneManager.LoadScene(GameSceneUtility.SampleSceneName);
     }
 }

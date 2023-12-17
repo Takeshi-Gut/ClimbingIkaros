@@ -7,7 +7,7 @@ public static class GameSceneUtility
     /// <summary>
     /// ゲームシーンの名前を定数化
     /// </summary>
-    public const string GameSceneName = "SampleScene";
+    public const string SampleSceneName = "SampleScene";
 
     /// <summary>
     /// タイトルシーンの名前を定数化

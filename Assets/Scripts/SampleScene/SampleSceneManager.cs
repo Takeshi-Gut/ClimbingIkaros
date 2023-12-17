@@ -11,7 +11,7 @@ public class SampleSceneManager : MonoBehaviour
     /// </summary>
     public void GotoOutGameScene()
     {
-        SceneManager.LoadScene(GameSceneUtility.GameSceneName);
+        SceneManager.LoadScene(GameSceneUtility.SampleSceneName);
     }
 
 }
