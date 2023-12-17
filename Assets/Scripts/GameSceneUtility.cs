@@ -9,6 +9,9 @@ public static class GameSceneUtility
     /// </summary>
     public const string GameSceneName = "SampleScene";
 
-
+    /// <summary>
+    /// タイトルシーンの名前を定数化
+    /// </summary>
+    public const string TitleSceneName = "TitleScene";
 
 }

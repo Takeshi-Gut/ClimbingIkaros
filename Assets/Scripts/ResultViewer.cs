@@ -13,14 +13,18 @@ public class ResultViewer : MonoBehaviour
 
     public Button RetryButton;
 
+    public Button GotoTitleButton;
+
     /// <summary>
     /// GameObjectがアクティブになったときに実行される
     /// </summary>
     private void OnEnable()
     {
         HighScoreText.text = $"貴方のスコアは{Score.GetScoreText}";
-
+       
         RetryButton.gameObject.SetActive(true);
+
+        GotoTitleButton.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -29,5 +33,13 @@ public class ResultViewer : MonoBehaviour
     public void Reload()
     {
         SceneManager.LoadScene(GameSceneUtility.GameSceneName);
+    }
+
+    /// <summary>
+    /// タイトルシーンに遷移する
+    /// </summary>
+    public void GotoTitleScene()
+    {
+        SceneManager.LoadScene(GameSceneUtility.TitleSceneName);
     }
 }
