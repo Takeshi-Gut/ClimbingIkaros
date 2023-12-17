@@ -20,7 +20,10 @@ public class StageBase : MonoBehaviour
     /// </summary>
     public StageTypes StageType = StageTypes.Normal;
 
-
+    /// <summary>
+    /// SoundManagerの変数だが、このsoundManagerが使われるタイミングでシーン上から探索される
+    /// </summary>
+    private SoundManager soundManager => FindAnyObjectByType<SoundManager>();
 
 
 
@@ -28,15 +31,15 @@ public class StageBase : MonoBehaviour
     /// 侵入判定
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D ( Collider2D collision )
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         //当たってきたのがプレイヤーだったら
-        if ( collision.gameObject.tag == GameSettingUtility.PlayerTagName )
+        if (collision.gameObject.tag == GameSettingUtility.PlayerTagName)
         {
-            if ( collision.transform.position.y > this.transform.position.y )
+            if (collision.transform.position.y > this.transform.position.y)
             {
                 //自分のBoxCollider2DのIsTriggerをオフにする
-                this.GetComponent<BoxCollider2D> ().isTrigger = false;
+                this.GetComponent<BoxCollider2D>().isTrigger = false;
             }
         }
     }
@@ -44,9 +47,9 @@ public class StageBase : MonoBehaviour
 
 
 
-    public void OnCollisionEnter2DAction ( GameObject player )
+    public void OnCollisionEnter2DAction(GameObject player)
     {
-        switch ( StageType )
+        switch (StageType)
         {
             case StageTypes.Invalide:
                 break;
@@ -57,51 +60,57 @@ public class StageBase : MonoBehaviour
 
             case StageTypes.Fall:
                 //Playerが当たったら落とす実装
-                if ( this.gameObject.GetComponent<Rigidbody2D> () == null )
+                if (this.gameObject.GetComponent<Rigidbody2D>() == null)
                 {
-                    this.gameObject.AddComponent<Rigidbody2D> ();
+                    this.gameObject.AddComponent<Rigidbody2D>();
                 }
                 //this.gameObject.SetActive ( false );   
                 break;
 
             case StageTypes.Acceleration:
                 //もしtimeScaleが2倍を超えないかぎりtimeScaleは変更される
-                if ( Time.timeScale < 2f )
+                if (Time.timeScale < 2f)
                 {
                     //timeScaleは2倍のままにする
                     Time.timeScale *= 1.2f;
-                    Debug.Log ( $"{Time.timeScale}" );
+                    Debug.Log($"{Time.timeScale}");
                 }
                 break;
 
             case StageTypes.Damage:
 
                 //Healthコンポーネントをゲットしてきて
-                var health = player.GetComponent<Health> ();
-                if ( health != null )
+                var health = player.GetComponent<Health>();
+                if (health != null)
                 {
+                    if (soundManager != null)
+                    {
+                        soundManager.PlaySE();
+                    }
+
+
                     //HealthコンポーネントのTakeDamageを発動させる。
-                    health.TakeDamage ( 20f );
+                    health.TakeDamage(20f);
                 }
                 break;
         }
     }
 
-    private void Update ()
+    private void Update()
     {
         //もしステージタイプがMoveだったら
-        if ( StageType == StageTypes.Move )
+        if (StageType == StageTypes.Move)
         {
             //引数に時間を突っ込んだSinを取得する
             //Sin(x)のグラフの動きをするので1から-1の値が代入される。
-            var sin = Mathf.Sin ( Time.time );
+            var sin = Mathf.Sin(Time.time);
             // 一時変数のposを作成し、コードを読みやすくする
             var pos = this.transform.position;
             // 自分のpositionのxの値にsinを足し続ける
             this.transform.position = new Vector3
-                ( pos.x + sin * GameSettingUtility.MoveStageHorizontalFactor,
+                (pos.x + sin * GameSettingUtility.MoveStageHorizontalFactor,
                 pos.y,
-                pos.z );
+                pos.z);
         }
     }
 }

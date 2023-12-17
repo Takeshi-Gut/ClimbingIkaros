@@ -8,15 +8,25 @@ public class MainGameStateManager : MonoBehaviour
 
     public Timer Timer;
 
+    /// <summary>
+    /// soundManagerが使われるタイミングでシーン上から探索する
+    /// </summary>
+    private SoundManager soundManager => FindAnyObjectByType<SoundManager>();
+
+    private void Start()
+    {
+        soundManager.PlayBGM();
+    }
+
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         //Timerの制限時間が0を下回った時
-        if ( Timer.GetLimitTime < 0f )
+        if (Timer.GetLimitTime < 0f)
         {
             //ResultCanvasのアクティブをオンにする
-            ResultCanvas.gameObject.SetActive ( true );
+            ResultCanvas.gameObject.SetActive(true);
         }
     }
 }
