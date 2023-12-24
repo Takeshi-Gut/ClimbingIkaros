@@ -62,29 +62,41 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //
+    private MainGameStateManager mainGameStateManager => FindAnyObjectByType<MainGameStateManager>();
 
 
-    void Start ()
+
+
+    void Start()
     {
-        playerRigidBody = GetComponent<Rigidbody2D> ();
+        playerRigidBody = GetComponent<Rigidbody2D>();
     }
 
 
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
+        //もしmainGameStateManagerでゲーム修了のフラグが立っていたら
+        if(mainGameStateManager.GetGameEnd)
+        {
+            //移動など（ここから下）の処理をしない
+            return;
+        }
+
+
         //左右の入力を取得
-        var horizontalInput = Input.GetAxis ( "Horizontal" );
+        var horizontalInput = Input.GetAxis("Horizontal");
 
         //左右の移動を計算
         var moveX = horizontalInput * moveSpeed * Time.deltaTime;
 
 
-        if ( isRight )
+        if (isRight)
         {
             //左が押された
-            if ( horizontalInput < 0 )
+            if (horizontalInput < 0)
             {
                 isRight = false;
             }
@@ -92,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             //右が押された
-            if ( horizontalInput > 0 )
+            if (horizontalInput > 0)
             {
                 isRight = true;
             }
@@ -102,11 +114,11 @@ public class PlayerMovement : MonoBehaviour
 
 
         //現在の位置に移動量を追加
-        transform.Translate ( new Vector3 ( moveX,0,0 ) );
+        transform.Translate(new Vector3(moveX,0,0));
 
         //地面に接触しているかを判定
         isGroundedCollider = Physics2D.OverlapCircle
-            ( transform.position - new Vector3 ( 0,0.9f,0 ),0.2f,GroundLayer );
+            (transform.position - new Vector3(0,0.9f,0),0.2f,GroundLayer);
 
 
 
@@ -122,25 +134,25 @@ public class PlayerMovement : MonoBehaviour
         //}
     }
 
-    private void FixedUpdate ()
+    private void FixedUpdate()
     {
         //地面に接地しており、なおかつ下降中の場合
-        if ( isGroundedCollider != null && playerRigidBody.velocity.y < 0f )
+        if (isGroundedCollider != null && playerRigidBody.velocity.y < 0f)
         {
             //当たったColliderのStageBaseを取得
-            var stageBase = isGroundedCollider.GetComponent<StageBase> ();
+            var stageBase = isGroundedCollider.GetComponent<StageBase>();
 
             //StageBaseが取得できれば
-            if ( stageBase != null )
+            if (stageBase != null)
             {
-                stageBase.OnCollisionEnter2DAction ( this.gameObject );
+                stageBase.OnCollisionEnter2DAction(this.gameObject);
 
 
                 //PlayerのRigidbody2Dに上向きの力を加える
-                playerRigidBody.velocity = new Vector2 ( playerRigidBody.velocity.x,jumpForce );
+                playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x,jumpForce);
 
                 //ジャンプカウント処理を呼び出す
-                JumpCount.AddJumpCount ();
+                JumpCount.AddJumpCount();
             }
 
             //jumpPowerに加速度のyを与える
