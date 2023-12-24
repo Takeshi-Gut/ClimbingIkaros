@@ -30,6 +30,9 @@ public class TitleSceneManager : MonoBehaviour
     public void GotoInGameScene()
     {
         StartCoroutine(SceneTransition());
+
+        //BGM‚Ì‰¹—Ê‚ð0‚É‚·‚é
+        soundManager.GetBGMAudioSouce.volume = 0;
     }
 
     /// <summary>
@@ -44,6 +47,8 @@ public class TitleSceneManager : MonoBehaviour
         //SE‚ª–Â‚Á‚Ä‚¢‚éŠÔ‘Ò‚Â
         yield return new WaitWhile(() => soundManager.IsSEAudioSourcesPlaying());
         SceneManager.LoadScene(GameSceneUtility.SampleSceneName);
+
+
     }
 
 
