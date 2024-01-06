@@ -27,7 +27,33 @@ public class MainGameStateManager : MonoBehaviour
     private void Start()
     {
         soundManager.PlayBGM();
+        {
+            //カウントダウンのスタートコルーチン。スタートしたらカウントダウンを始める。
+            StartCoroutine(CountDownCoroutine());
+        }
     }
+
+    public IEnumerator CountDownCoroutine()
+    {
+        //3秒からカウントダウンし、0より大きかったら１を引き続けよ
+        for (int i = 3 ; i >= 1 ; i--)
+        {
+            //1秒待つ
+            yield return new WaitForSeconds(1);
+
+            //DebugLogにカウントダウン表示。3.2.1.STARTを表示する。
+            Debug.Log(i.ToString());
+
+            //もし-1秒になったら、STARTとDebug.Logに表示せよ
+            if (i == 1)
+            {
+                //1秒待つ
+                yield return new WaitForSeconds(1);
+                Debug.Log("START");
+            }
+        }
+    }
+
 
 
     // Update is called once per frame

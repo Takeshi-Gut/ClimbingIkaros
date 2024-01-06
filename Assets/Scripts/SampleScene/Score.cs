@@ -43,6 +43,6 @@ public class Score : MonoBehaviour
             currentHighScore = Player.transform.position.y;
         }
 
-        Debug.Log ( currentHighScore );
+        //Debug.Log ( currentHighScore );
     }
 }
